@@ -20,6 +20,14 @@ h1,h2,h3,h4,h5,h6,.brand{font-family:'Playfair Display', serif;}
 .nav a{color:var(--muted);text-decoration:none;padding:.45rem .6rem;border-radius:8px}
 .nav a.cta{background:var(--accent);color:#052;font-weight:700}
 .nav a.active{color:var(--white)}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:0.5rem;z-index:50}
+.hamburger{display:block;width:24px;height:2px;background:var(--white);position:relative;transition:background 0.3s}
+.hamburger::before, .hamburger::after{content:'';position:absolute;left:0;width:100%;height:2px;background:var(--white);transition:transform 0.3s, top 0.3s}
+.hamburger::before{top:-8px}
+.hamburger::after{top:8px}
+.hamburger.active{background:transparent}
+.hamburger.active::before{top:0;transform:rotate(45deg)}
+.hamburger.active::after{top:0;transform:rotate(-45deg)}
 
 .hero-large{min-height:80vh;display:flex;align-items:center;position:relative;background-size:cover;background-position:center;overflow:hidden;}
 .hero-overlay{position:absolute;inset:0;background:linear-gradient(90deg, #051125 0%, rgba(5,17,37,0.85) 50%, rgba(5,17,37,0.3) 100%);z-index:1;}
@@ -74,8 +82,22 @@ select option { background: var(--panel); color: var(--white); }
 .label-before{left:1rem;z-index:20}
 .label-after{right:1rem;z-index:10}
 
-@media(max-width:860px){
-  .hero h1{font-size:2rem}
-  .nav{gap:.6rem}
-  .nav a.cta{padding:.45rem .7rem}
+@media(max-width:768px){
+  .nav-toggle{display:block}
+  .nav{
+    position:fixed;top:0;right:-100%;width:80%;height:100vh;
+    background:rgba(5,7,10,0.98);backdrop-filter:blur(10px);
+    flex-direction:column;justify-content:center;
+    transition:right 0.3s ease-in-out;z-index:40;
+    border-left:1px solid rgba(255,255,255,0.1);
+  }
+  .nav.open{right:0;box-shadow:-10px 0 30px rgba(0,0,0,0.5)}
+  .nav a{font-size:1.5rem;width:100%;text-align:center;padding:1rem}
+  
+  .hero h1{font-size:2.2rem}
+  .hero-large{min-height:60vh}
+  .compare-container{height:250px}
+  .step-number{font-size:2rem;top:0.5rem;right:1rem}
+  .footer-grid{grid-template-columns:1fr;gap:2rem}
+  .grid{grid-template-columns:1fr}
 }
